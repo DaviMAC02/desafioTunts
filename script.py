@@ -34,7 +34,7 @@ def main():
     # Opening CVS file
     worksheet = spreadsheet.get_worksheet(0)
 
-    # Defining total number of classes
+    # Defining total number of classes (as it was not specified I defined as 50)
 
     classes = 50
 
@@ -59,11 +59,10 @@ def main():
             worksheet.update_cell(student_row, 7, 'Aprovado')
             worksheet.update_cell(student_row, 8, '0')
         elif(average >= 5 and average < 7):
-            naf = str(10/average)
+            # Calculating the score to be approved and limiting the decimal points
+            naf = str(round(10/average, 2))
             worksheet.update_cell(student_row, 7, 'Exame Final')
             worksheet.update_cell(student_row, 8, naf)
-
-
         else:
             worksheet.update_cell(student_row, 7, 'Reprovado por Nota')
             worksheet.update_cell(student_row, 8, '0')
