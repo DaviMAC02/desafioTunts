@@ -16,6 +16,7 @@ from math import ceil
 
 def main():
     # Allowing script to access the spreadsheet
+    # Note: In order to access the spreadsheet you have to generate your own credentials.json file via Google Cloud Platform
 
     scope = ["https://spreadsheets.google.com/feeds", 'https://www.googleapis.com/auth/spreadsheets',
             "https://www.googleapis.com/auth/drive.file", "https://www.googleapis.com/auth/drive"]
@@ -37,11 +38,19 @@ def main():
 
     classes = 50
 
+    # Running through each student
+
     for student_row in range(4, 28):
+
+        # Getting row values
         student_data = worksheet.row_values(student_row) 
         print('Calculating situation of student number: ' + student_data[0])
+
+        # Calculating student average and getting the number of absences
         average = calculate_average(student_data)
         absences = int(student_data[2])
+
+        # Applying conditions and updating the cells
 
         if(absences/classes >= 0.25):
             worksheet.update_cell(student_row, 7, 'Reprovado por Falta')
@@ -58,6 +67,9 @@ def main():
         else:
             worksheet.update_cell(student_row, 7, 'Reprovado por Nota')
             worksheet.update_cell(student_row, 8, '0')
+
+    # Printing a success message
+
     print("All Done!")
 
 
