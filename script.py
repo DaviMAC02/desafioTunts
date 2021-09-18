@@ -59,8 +59,10 @@ def main():
             worksheet.update_cell(student_row, 7, 'Aprovado')
             worksheet.update_cell(student_row, 8, '0')
         elif(average >= 5 and average < 7):
-            # Calculating the score to be approved and limiting the decimal points
-            naf = str(round(10/average, 2))
+            # Calculating the score to be approved based in a range from 0 to 100 
+            # just like in the spreadsheet 
+            # and limiting the decimal points
+            naf = str(round(10/average, 2)*10)
             worksheet.update_cell(student_row, 7, 'Exame Final')
             worksheet.update_cell(student_row, 8, naf)
         else:
